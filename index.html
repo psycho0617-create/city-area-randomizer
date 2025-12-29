@@ -270,20 +270,62 @@
       color:#6b7280;
       font-size:12px;
     }
+
+    /* ===== Mobile layout fix ===== */
+    @media (max-width: 600px) {
+      /* 入力欄と下の操作枠の余白を確保 */
+      .search-block .search-input {
+        margin-bottom: 12px;
+      }
+
+      /* 操作エリアを縦積みに */
+      .controls-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      /* 左(プール/表示件数)・右(市名チェック/検索)をそれぞれ100%に */
+      .controls-left,
+      .controls-right {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      /* 市名チェックの行：幅いっぱい */
+      .controls-right label {
+        width: 100%;
+      }
+
+      /* 検索ボタンを押しやすく：横幅100% */
+      .controls-right .btn-search {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 16px;
+        border-radius: 12px;
+      }
+
+      /* ボタン群（5/8/10など）が詰まるので折り返し許可 */
+      .segmented {
+        flex-wrap: wrap;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="card">
-    <div class="section">
+    <div class="section search-block">
       <div class="section-title">
         <h2>市区町村を入力</h2>
       </div>
       <p class="muted">部分一致OK（例：川越 でもOK）</p>
-      <input id="q" class="cityInput" placeholder="例）川越市 / 那覇市 / 札幌市" />
+      <input id="q" class="cityInput search-input" placeholder="例）川越市 / 那覇市 / 札幌市" />
 
-      <div class="controlsBar">
-        <div class="controlsLeft">
+      <div class="controlsBar controls-row">
+        <div class="controlsLeft controls-left">
           <div class="control">
             <label class="control-label"><span>プール（上位N）</span></label>
             <div class="segmented" id="poolSizeGroup">
@@ -303,13 +345,13 @@
           </div>
         </div>
 
-        <div class="controlsRight">
+        <div class="controlsRight controls-right">
           <label class="checkboxRow">
             <input id="showCityPrefix" type="checkbox" checked />
             <span>市名を付けて表示</span>
           </label>
 
-          <button id="btn" class="searchBtn">検索</button>
+          <button id="btn" class="searchBtn btn-search">検索</button>
         </div>
       </div>
     </div>
